@@ -226,10 +226,14 @@ class FormBuilderFieldState<F extends FormBuilderField<T>, T>
     Scrollable.ensureVisible(context);
   }
 
-  void invalidate(String errorText) {
+  void invalidate(
+    String errorText, {
+    bool shouldRequestFocus = false,
+  }) {
     setState(() => _customErrorText = errorText);
     validate(clearCustomError: false);
-    requestFocus();
+
+    if (shouldRequestFocus) requestFocus();
   }
 
   InputDecoration get decoration => widget.decoration.copyWith(

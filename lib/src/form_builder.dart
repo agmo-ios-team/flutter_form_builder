@@ -225,11 +225,20 @@ class FormBuilderState extends State<FormBuilder> {
     _savedValue.addAll(_instantValue);
   }
 
-  void invalidateField({required String name, String? errorText}) =>
-      fields[name]?.invalidate(errorText ?? '');
+  void invalidateField({
+    required String name,
+    String? errorText,
+    bool shouldRequestFocus = false,
+  }) =>
+      fields[name]
+          ?.invalidate(errorText ?? '', shouldRequestFocus: shouldRequestFocus);
 
-  void invalidateFirstField({required String errorText}) =>
-      fields.values.first.invalidate(errorText);
+  void invalidateFirstField({
+    required String errorText,
+    bool shouldRequestFocus = false,
+  }) =>
+      fields.values.first
+          .invalidate(errorText, shouldRequestFocus: shouldRequestFocus);
 
   bool validate() {
     final hasError = !_formKey.currentState!.validate();
